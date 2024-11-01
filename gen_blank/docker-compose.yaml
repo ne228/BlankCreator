@@ -1,12 +1,14 @@
 version: '3.8'
 
 services:
-  app:
+  py:
+    image: gen_blank_py:latest
+    container_name: gen_blank_py
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"  # Порт, который будет использоваться Flask
+      - "5005:5005"  # Порт, который будет использоваться Flask
     volumes:
       - .:/app  # Монтируем текущую директорию в контейнер
     environment:
