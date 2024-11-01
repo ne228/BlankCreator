@@ -1,0 +1,132 @@
+<template>
+    <v-form ref="form" v-model="valid" lazy-validation>
+        <v-container class="form-container">
+            <!-- Должность и приказы -->
+            <v-card class="mb-4">
+                <v-card-title>Приказ о зачислении</v-card-title>
+                <v-card-text>
+                    <v-row>
+                        <v-col cols="12" md="6">
+                            <v-text-field v-model="form.datePr" :rules="[rules.required, rules.dateFormat]"
+                                label="Дата приказа о зачислении (dd.MM.yyyy)" placeholder="dd.MM.yyyy"
+                                @input="validateDateInput('datePr', $event)"></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field v-model="form.numPr" :rules="rules.required" label="Номер приказа"
+                                required></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field v-model="form.dateEnrollment" :rules="[rules.required, rules.dateFormat]"
+                                label="Дата зачисления (dd.MM.yyyy)" placeholder="dd.MM.yyyy"
+                                @input="validateDateInput('dateEnrollment', $event)"></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
+            </v-card>
+
+            <v-row cols="12">
+                <v-col align="center">
+                    <v-btn variant="outlined" color="red" @click="back">Назад</v-btn>
+                </v-col>
+                <v-col align="center">
+                    <v-btn color="success" @click="submit">Сохранить</v-btn>
+                </v-col>
+            </v-row>
+
+        </v-container>
+
+        <v-snackbar v-model="snackbar.show" :timeout="3000" color="success">
+            {{ snackbar.message }}
+            <v-btn color="white" @click="snackbar.show = false">Закрыть</v-btn>
+        </v-snackbar>
+    </v-form>
+</template>
+
+<script>
+import { post, getData } from '@/services/apiService';
+import { th } from 'vuetify/lib/locale/index.mjs';
+
+export default {
+    data() {
+        const testData = false;
+        return {
+            valid: false,
+            form: {
+                datePr: testData ? '01.09.2019' : '',
+                numPr: testData ? '515-12' : '',
+                dateEnrollment: testData ? "01.09.2018" : ''
+            },
+            rules: {
+                required: [(v) => !!v || 'Это поле обязательно'],
+                dateFormat: [(v) => !v || /^\d{2}\.\d{2}\.\d{4}$/.test(v) || 'Неверный формат даты (dd.MM.yyyy)'],
+            },
+            snackbar: {
+                show: false,
+                message: '',
+            },
+        };
+    },
+    mounted() {
+        this.requestData();
+    },
+    methods: {
+        validateDateInput(field, event) {
+            const regex = /^\d{0,2}(\.\d{0,2})?(\.\d{0,4})?$/;
+            const input = event.target.value;
+
+            if (!regex.test(input)) {
+                this.form[field] = input.slice(0, -1);
+            }
+        },
+        back() {
+            let id = this.$route.params.id;
+            this.$router.push(`/hub/${id}`)
+        },
+        async requestData() {
+            try {
+                var id = this.$route.params.id;
+                const response = await getData(`get?id=${id}`);
+                // this.form = response.data;
+                console.log("getBlankInfo", response);
+                this.form = response.data;
+
+            } catch (error) {
+                console.error('Ошибка при получении данных', error);
+            }
+        },
+        async submit() {
+            if (this.$refs.form.validate()) {
+                console.log('Данные отправлены:', this.form);
+                this.form.hubId = this.$route.params.id;
+                try {
+                    const response = await post('/edit', this.form);
+                    console.log('Response:', response.id);
+                    this.$router.push(`/hub/${response.id}`)
+                } catch (error) {
+                    console.error('Error sending data:', error);
+                }
+            }
+        },
+    },
+};
+</script>
+
+<style scoped>
+.form-container {
+    padding: 20px;
+    /* background-color:; */
+    margin-top: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.v-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mb-4 {
+    margin-bottom: 20px;
+}
+</style>

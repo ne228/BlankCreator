@@ -1,0 +1,38 @@
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1em;
+  }
+  h2 {
+    font-size: 0.8em;
+  }
+  h3 {
+    font-size: 0.6em;
+  }
+  p {
+    font-size: 0.6em;
+  }
+  ul {
+    font-size: 0.6em;
+  }
+  span {
+    font-size: 0.8em;
+  }
+}
+.v-slide-group__content {
+  justify-content: center;
+}
+
+.search-input input {
+  padding-left: 30px;
+}
+
+.search-input::before {
+  content: '\F349';
+  font-family: 'Material Design Icons';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #aaa;
+}

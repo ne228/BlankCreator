@@ -1,0 +1,72 @@
+<template>
+
+  <v-row justify="center">
+    <v-col>
+      <v-card class="d-flex flex-column" min-height="400px">
+        <v-card-title>
+          <v-icon left>mdi-account</v-icon>
+          <span>Профиль пользователя</span>
+        </v-card-title>
+
+        <!-- Блок с информацией о пользователе -->
+        <v-card-subtitle>Информация о пользователе</v-card-subtitle>
+        <v-card-text class="flex-grow-1">
+          <p v-if="user">
+            <v-icon left>mdi-account-circle</v-icon>
+            <strong class="ml-2"> {{ user.username }}</strong>
+
+          </p>
+          <p v-if="user" class="mt-2">
+            <v-icon left>mdi-email</v-icon>
+            <strong class="ml-2"> {{ user.email }}</strong>
+
+          </p>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <!-- Блок с действиями -->
+        <v-card-subtitle>Действия</v-card-subtitle>
+        <v-card-actions class="mt-auto">
+          <v-btn @click="logout" color="primary">
+            <v-icon left>mdi-logout</v-icon>
+            Выйти
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
+  </v-row>
+</template>
+
+<script>
+import authService from '@/services/authService';
+
+
+
+export default {
+  data() {
+    return {
+      user: null
+    };
+  },
+  mounted() {
+    this.getUserData();
+  },
+  methods: {
+    getUserData() {
+      this.user = authService.getCurrentUser();
+    },
+    click() {
+      // Добавьте здесь код, который нужно выполнить при нажатии на кнопку
+    },
+    logout() {
+      console.log("logout")
+      authService.logout()
+    }
+  }
+};
+</script>
+
+<style scoped>
+/* Добавьте стили здесь, если это необходимо */
+</style>
