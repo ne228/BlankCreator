@@ -6,6 +6,7 @@ import com.smallaxe.blank_creator.repositories.UserRepository;
 //import com.example.ais_ecc.service.DbInit;
 import com.smallaxe.blank_creator.service.DbInit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +36,7 @@ public class SecurityJWTConfig extends WebSecurityConfigurerAdapter {
     @Autowired private JwtTokenFilter jwtTokenFilter;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         dbInit.Init();
         http.csrf().disable()
                 .cors().and() // Добавьте CORS, если это нужно

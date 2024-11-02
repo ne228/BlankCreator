@@ -8,7 +8,8 @@ services:
     environment:
         - SPRING_PROFILES_ACTIVE=docker
     ports:
-      - "5007:5007"
+      - "${JAVA_PORT}:${JAVA_PORT}"
+
 
   blank_creator_db:
     image: postgres:latest

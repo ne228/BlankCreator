@@ -1,7 +1,11 @@
 import axios from 'axios'
 import authService from './authService'
 
-const BASE_URL = 'http://194.58.66.113:5007/api/hub'
+
+
+const JAVA_IP = import.meta.env.VITE_JAVA_IP;
+const JAVA_PORT = import.meta.env.VITE_JAVA_PORT;
+const BASE_URL = `http://${JAVA_IP}:${JAVA_PORT}/api/hub`
 
 const apiService = axios.create({
   baseURL: BASE_URL,

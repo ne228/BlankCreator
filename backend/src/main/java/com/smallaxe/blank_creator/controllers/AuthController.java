@@ -12,6 +12,7 @@ import com.smallaxe.blank_creator.repositories.RoleRepository;
 import com.smallaxe.blank_creator.repositories.UserRepository;
 import com.smallaxe.blank_creator.service.auth.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

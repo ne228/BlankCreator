@@ -1,7 +1,11 @@
 import router from '@/router'
 import axios from 'axios'
 
-const API_URL = 'http://194.58.66.113:5007/api/auth/'
+
+const JAVA_IP = import.meta.env.VITE_JAVA_IP;
+const JAVA_PORT = import.meta.env.VITE_JAVA_PORT;
+const API_URL = `http://${JAVA_IP}:${JAVA_PORT}/api/auth/`
+
 
 class AuthService {
   login(user) {

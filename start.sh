@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Массив с путями до docker-compose.yaml
+exit;
 paths=(
     "backend/docker-compose.yaml"
     "client/docker-compose.yaml"
@@ -20,7 +21,7 @@ for path in "${paths[@]}"; do
     # Выполнение docker-compose down
     docker compose down
     docker compose build
-    docker compose up -d
+    docker compose --env-file ..\.env up -d
 
     # Возврат в исходную директорию (если нужно)
     cd - > /dev/null
