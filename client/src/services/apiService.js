@@ -1,7 +1,7 @@
 import axios from 'axios'
 import authService from './authService'
 
-const BASE_URL = 'http://localhost:5007/api/hub'
+const BASE_URL = 'http://194.58.66.113:5007/api/hub'
 
 const apiService = axios.create({
   baseURL: BASE_URL,

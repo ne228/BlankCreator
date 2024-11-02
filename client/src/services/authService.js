@@ -1,7 +1,7 @@
 import router from '@/router'
 import axios from 'axios'
 
-const API_URL = 'http://localhost:5007/api/auth/'
+const API_URL = 'http://194.58.66.113:5007/api/auth/'
 
 class AuthService {
   login(user) {
