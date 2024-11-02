@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("api/hub")
@@ -94,7 +95,7 @@ public class BlankController {
 
         var blanksToPrint = hub.getBlankList().stream()
                 .filter(blank -> idsBlank.contains(blank.getId()))
-                .toList();
+                .collect(Collectors.toList());
         byte[] bytes = blankService.print(blanksToPrint);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);

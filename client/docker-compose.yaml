@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  blank_creatro_vue:
+    image: blank_creatro_vue
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+

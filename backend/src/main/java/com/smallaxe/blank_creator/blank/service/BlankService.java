@@ -19,16 +19,19 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class BlankService {
@@ -36,6 +39,8 @@ public class BlankService {
     private final BlankRepository blankRepository;
     private final BlankHubRepository blankHubRepository;
 
+    @Value("${api_py}")
+    private String url;
 
     public BlankService(AuthService authService, BlankRepository blankRepository, BlankHubRepository blankHubRepository) {
         this.authService = authService;
@@ -97,12 +102,12 @@ public class BlankService {
         var hub = blankHubRepository.findById(id).orElse(null);
         if (hub == null) throw new ObjectNotFoundException(id, "Хранилище не найдено");
         if (!isCanAccessToBlankHub(hub, currentUser))
-            hub.setBlankList(hub.getBlankList().stream().filter(blank -> blank.getUser().getId().equals(currentUser.getId())).toList());
+            hub.setBlankList(hub.getBlankList().stream().filter(blank -> blank.getUser().getId().equals(currentUser.getId())).collect(Collectors.toList()));
 
         hub.setBlankList(hub.getBlankList()
                 .stream()
                 .sorted(Comparator.comparing(Blank::getDateCreate).reversed())
-                .toList());
+                .collect(Collectors.toList()));
         return hub;
     }
 
@@ -171,9 +176,9 @@ public class BlankService {
         if (blanks.stream().anyMatch(blank -> !isCanAccessToBlank(blank, currentUser)))
             throw new AccessDeniedException("Нет доступа к одному из бланков");
 
-        var blankModels = blanks.stream().map(blank -> new BlankPrintDto().toModel(blank)).toList();
+        var blankModels = blanks.stream().map(blank -> new BlankPrintDto().toModel(blank)).collect(Collectors.toList());
 
-        String url = "http://127.0.0.1:5000/create_blank_docx"; // Замените на ваш URL
+      // Замените на ваш URL
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost post = new HttpPost(url);
 

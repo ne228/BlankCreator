@@ -14,7 +14,7 @@
     <name>Blank Creator</name>
     <description>Blank Creator</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>11</java.version>
     </properties>
     <dependencies>
         <!-- Spring Boot Starter Dependencies -->

@@ -21,7 +21,7 @@ FROM eclipse-temurin:11-jdk-alpine
 WORKDIR /app
 
 # Копируем скомпилированный jar файл из первого этапа
-COPY --from=build /app/target/AIS_ECC-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/blank_creator.jar app.jar
 
 # Устанавливаем команду для запуска приложения
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
