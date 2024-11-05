@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.bind.ValidationException;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -77,7 +78,7 @@ public class AuthController {
 
 
     @PostMapping("/guest_signin")
-    public ResponseEntity<?> authenticateAnonUser(@Valid @RequestBody AnonLoginRequest anonLoginRequest) {
+    public ResponseEntity<?> authenticateAnonUser(@Valid @RequestBody AnonLoginRequest anonLoginRequest) throws ValidationException {
 
         var password = "password123";
         var username = anonLoginRequest.getUsername();
@@ -91,6 +92,7 @@ public class AuthController {
         // SignUp guest
         var signupRequest = new SignupRequest();
         signupRequest.setPassword(password);
+        signupRequest.setRetypePassword(password);
         signupRequest.setUsername(username);
         signupRequest.setGuest(true);
         signupRequest.setEmail(username + "@mail.ru");
@@ -137,7 +139,10 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws ValidationException {
+
+        if (!signUpRequest.getPassword().equals(signUpRequest.getRetypePassword()))
+            throw new ValidationException("Пароли не совпадают");
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()

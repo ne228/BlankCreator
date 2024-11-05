@@ -7,29 +7,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.smallaxe.blank_creator.blank.entity.Blank;
 
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class BlankCreateDto {
     @JsonProperty
+    @NotBlank()
     private String hubId;
     @JsonProperty("rank")
+    @NotBlank(message = "Введите звание")
     private String rank;
     @JsonProperty("name")
+    @NotBlank(message = "Введите имя")
     private String name;
-    @JsonFormat(pattern = "dd.MM.yyyy")
+
+    @NotNull(message = "Введите дату рождения")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate dateBirth;
-    @JsonProperty
+    @NotBlank
+    @NotBlank(message = "Введите должность")
     private String duty;
-    @JsonFormat(pattern = "dd.MM.yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    @NotNull(message = "Введите год окончания")
     private LocalDate dateEnrollment;
     @JsonProperty
+    @NotBlank(message = "Введите срок обученя")
     private String trm;
     @JsonProperty
+    @NotBlank(message = "Введите год окончания")
     private String dateEnd;
     @JsonProperty
+    @NotBlank(message = "Введите место назначения справки")
     private String place;
     @JsonProperty
+    @NotBlank(message = "Введите город назначения справки")
     private String town;
+
+    @JsonProperty
+    private boolean saveAsTemplate;
     // Метод toEntity
     public Blank toEntity() {
         Blank blank = new Blank();
@@ -124,5 +140,13 @@ public class BlankCreateDto {
 
     public void setTown(String town) {
         this.town = town;
+    }
+
+    public boolean isSaveAsTemplate() {
+        return saveAsTemplate;
+    }
+
+    public void setSaveAsTemplate(boolean saveAsTemplate) {
+        this.saveAsTemplate = saveAsTemplate;
     }
 }

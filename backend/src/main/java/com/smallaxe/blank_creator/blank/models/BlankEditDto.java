@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.smallaxe.blank_creator.blank.entity.Blank;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 //@Data
@@ -15,27 +17,31 @@ public class BlankEditDto {
     @JsonProperty
     private String hubId;
     @JsonProperty("rank")
+    @NotBlank(message = "Введите звание")
     private String rank;
     @JsonProperty("name")
+    @NotBlank(message = "Введите имя")
     private String name;
     @JsonFormat(pattern = "dd.MM.yyyy")
+    @NotNull(message = "Введите дату рождения")
     private LocalDate dateBirth;
     @JsonProperty
+    @NotBlank(message = "Введите должность")
     private String duty;
-    @JsonFormat(pattern = "dd.MM.yyyy")
-    private LocalDate datePr;
+
+
     @JsonProperty
-    private String numPr;
-    @JsonFormat(pattern = "dd.MM.yyyy")
-    private LocalDate dateEnrollment;
-    @JsonProperty
+    @NotBlank(message = "Введите срок обучения")
     private String trm;
 
     @JsonProperty
+    @NotBlank(message = "Введите год окончания")
     private String dateEnd;
     @JsonProperty
+    @NotBlank(message = "Введите место назначения справки")
     private String place;
     @JsonProperty
+    @NotBlank(message = "Введите город назначения справки")
     private String town;
 
     // Метод toEntity
@@ -46,9 +52,6 @@ public class BlankEditDto {
         blank.setName(this.name);
         blank.setDateBirth(this.dateBirth);
         blank.setDuty(this.duty);
-        blank.setDatePr(this.datePr);
-        blank.setNumPr(this.numPr);
-        blank.setDateEnrollment(this.dateEnrollment);
         blank.setTrm(this.trm);
         blank.setDateEnd(this.dateEnd);
         blank.setPlace(this.place);
@@ -62,9 +65,6 @@ public class BlankEditDto {
         blank.setName(this.name);
         blank.setDateBirth(this.dateBirth);
         blank.setDuty(this.duty);
-        blank.setDatePr(this.datePr);
-        blank.setNumPr(this.numPr);
-        blank.setDateEnrollment(this.dateEnrollment);
         blank.setTrm(this.trm);
         blank.setDateEnd(this.dateEnd);
         blank.setPlace(this.place);
@@ -110,30 +110,6 @@ public class BlankEditDto {
 
     public void setDuty(String duty) {
         this.duty = duty;
-    }
-
-    public LocalDate getDatePr() {
-        return datePr;
-    }
-
-    public void setDatePr(LocalDate datePr) {
-        this.datePr = datePr;
-    }
-
-    public String getNumPr() {
-        return numPr;
-    }
-
-    public void setNumPr(String numPr) {
-        this.numPr = numPr;
-    }
-
-    public LocalDate getDateEnrollment() {
-        return dateEnrollment;
-    }
-
-    public void setDateEnrollment(LocalDate dateEnrollment) {
-        this.dateEnrollment = dateEnrollment;
     }
 
     public String getTrm() {

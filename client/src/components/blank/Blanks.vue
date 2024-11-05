@@ -9,13 +9,18 @@
                 </v-btn>
             </RouterLink>
         </div>
-        <div class="d-flex justify-space-between flex-wrap">
+        <div class="d-flex justify justify-space-between flex-wrap">
+            
             <v-btn size="small" class="ma-1"
                 :disabled="selectedRows.length == 0 || (processPrint && selectedRows.length > 0)" color="primary"
                 @click="print(hub.id)">
                 <div>Печать</div>
                 <v-icon class="ml-3">mdi-printer</v-icon>
             </v-btn>
+            <div class="ma-1">
+                <ImportBlankTemplate @importSuccess="handleImportSuccess" :hubId="hub.id" />
+            </div>
+
             <RouterLink class="ma-1" :to="`/hub/${hub.id}/blank/create`">
                 <v-btn size="small" color="success">
 
@@ -65,44 +70,44 @@
                         <td :data-label="headers[3].text">
                             {{ item.dateCreate }}
                         </td>
-                        <td :data-label="headers[4].text">
-                            <div class="d-flex flex-wrap align-center justify-space-between pl-2 pr-2">
-                                <div>
+                        <td class="d-flex justify-center" :data-label="headers[4].text">
+                           <div class="d-flex flex-row">
+                                <div class="ma-1">
                                     <RouterLink :to="`/hub/${this.hub.id}/blank/${item.id}`">
                                         <v-btn :size="33" icon>
                                             <v-icon small>mdi-eye</v-icon>
                                         </v-btn>
                                     </RouterLink>
                                 </div>
-                                <div>
+                                <div class="ma-1">
                                     <RouterLink :to="`/hub/${this.hub.id}/blank/edit/${item.id}`">
                                         <v-btn :size="33" icon>
                                             <v-icon small>mdi-pencil</v-icon>
                                         </v-btn>
                                     </RouterLink>
                                 </div>
-                                <div v-if="item.blankStatus == 'ЧЕРНОВИК' && isShowAction">
+                                <div class="ma-1" v-if="item.blankStatus == 'ЧЕРНОВИК' && isShowAction">
                                     <v-btn :size="33" icon color="red" @click="reject(item)">
                                         <v-icon>mdi-close</v-icon>
                                     </v-btn>
                                 </div>
-                                <div v-if="item.blankStatus == 'ЧЕРНОВИК' && isShowAction">
+                                <div class="ma-1" v-if="item.blankStatus == 'ЧЕРНОВИК' && isShowAction">
                                     <v-btn :size="33" icon color="green" @click="success(item)">
                                         <v-icon small>mdi-check</v-icon>
                                     </v-btn>
                                 </div>
 
-                                <div v-if="item.blankStatus == 'УСПЕШНО' && isShowAction">
+                                <div class="ma-1" v-if="item.blankStatus == 'УСПЕШНО' && isShowAction">
                                     <v-btn :size="33" icon color="green" @click="reject(item)">
                                         <v-icon>mdi-check</v-icon>
                                     </v-btn>
                                 </div>
-                                <div v-if="item.blankStatus == 'ОТКЛОНЕН' && isShowAction">
+                                <div class="ma-1" v-if="item.blankStatus == 'ОТКЛОНЕН' && isShowAction">
                                     <v-btn :size="33" icon color="red" @click="success(item)">
                                         <v-icon small>mdi-close</v-icon>
                                     </v-btn>
                                 </div>
-                                <div>
+                                <div class="ma-1">
                                     <v-btn :size="33" icon color="primary" @click="print(hub.id, item.id)">
                                         <v-icon small>mdi-printer</v-icon>
                                     </v-btn>
@@ -118,18 +123,17 @@
 
 <script>
 import { downloadPost, getData, post } from '@/services/apiService';
-import { el, fa, tr } from 'vuetify/lib/locale/index.mjs';
 import { saveAs } from 'file-saver';
 import authService from '@/services/authService';
+import ImportBlankTemplate from './ImportBlankTemplate.vue';
 export default {
+    components:{
+        ImportBlankTemplate
+    },
     data() {
         return {
             data: [], // Массив для хранения данных
-            dataTest: [
-                { name: 'Алексей', age: 30, city: 'Москва' },
-                { name: 'Мария', age: 25, city: 'Санкт-Петербург' },
-                { name: 'Иван', age: 35, city: 'Казань' },
-            ],
+
             selectAll: false,
             selectedRows: [], // Выбранные строки
             hub: null,
@@ -266,6 +270,9 @@ export default {
         },
         updateFilteredData() {
             this.filteredData = this.filteredData;
+        }, 
+        handleImportSuccess(blank){
+            this.data.push(blank);
         }
     },
     async mounted() {
@@ -314,6 +321,7 @@ table td {
     padding: 10px;
     text-align: center;
     border-right: 1px solid #ddd;
+
 }
 
 table th {
@@ -355,6 +363,7 @@ table th {
         font-size: 13px;
         border-bottom: 1px dotted #ccc;
         border-right: 1px solid transparent;
+        justify-content: space-between !important;
     }
 
     table td:last-child {

@@ -1,25 +1,20 @@
 <script setup>
 import { RouterView } from 'vue-router'
-
 </script>
 
 <template>
   <v-container>
-
     <div class="mx-auto">
       <v-layout>
         <v-app-bar>
-          <template v-slot:image>
-
-          </template>
+          <template v-slot:image> </template>
 
           <!-- <template v-slot:prepend>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
           </template> -->
           <RouterLink to="/" class="ml-5">
             <v-btn variant="outlined" color="primary" prepend-icon="mdi-file-document">
-              <h3>Справочный
-                Центр</h3>
+              <h3>Справочный Центр</h3>
             </v-btn>
           </RouterLink>
           <v-spacer></v-spacer>
@@ -30,7 +25,7 @@ import { RouterView } from 'vue-router'
             </v-btn>
           </RouterLink>
 
-          <RouterLink v-if="isAuthenticated" to="/#">
+          <RouterLink v-if="isAuthenticated" to="/blanks">
             <v-btn icon color="black">
               <v-icon>mdi-file-document</v-icon>
             </v-btn>
@@ -47,7 +42,6 @@ import { RouterView } from 'vue-router'
               <v-icon> mdi-login </v-icon>
             </v-btn>
           </RouterLink>
-
         </v-app-bar>
 
         <v-main>
@@ -69,12 +63,8 @@ import { RouterView } from 'vue-router'
             </v-footer>
           </v-container>
         </v-main>
-
-
       </v-layout>
-
     </div>
-
   </v-container>
   <!-- <v-container>
 
@@ -120,8 +110,7 @@ import { RouterView } from 'vue-router'
   </v-container> -->
 </template>
 <script>
-import authService from '@/services/authService';
-
+import authService from '@/services/authService'
 
 export default {
   data() {
@@ -129,39 +118,35 @@ export default {
       isAuthenticated: false,
       user: null,
       intervalId: null
-    };
+    }
   },
   mounted() {
-    this.isAuth();
-    this.intervalId = setInterval(this.isAuth, 1000);
-
+    this.isAuth()
+    this.intervalId = setInterval(this.isAuth, 1000)
   },
   beforeUnmount() {
     // Очищаем интервал перед размонтированием компонента
-    clearInterval(this.intervalId);
+    clearInterval(this.intervalId)
   },
   computed: {
     username() {
-      return authService.getCurrentUser().username;
-    },
-
+      return authService.getCurrentUser().username
+    }
   },
   methods: {
     getUser() {
-      var curUser = authService.getCurrentUser();
-      this.user = curUser;
-      return curUser;
+      var curUser = authService.getCurrentUser()
+      this.user = curUser
+      return curUser
     },
 
     isAuth() {
-      this.isAuthenticated = authService.isAuth();
-      return this.isAuthenticated;
-    },
+      this.isAuthenticated = authService.isAuth()
+      return this.isAuthenticated
+    }
   }
-
-};
+}
 </script>
-
 
 <style scoped>
 a {

@@ -1,6 +1,8 @@
 package com.smallaxe.blank_creator.payload.request;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -8,20 +10,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SignupRequest {
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "Введите имя пользователя")
+    @Size(min = 3, max = 20, message = "Длина имени пользователя должна быть от 3 до 20 символов")
+    @JsonProperty
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "Введите email")
     @Size(max = 50)
-    @Email
+    @Email(message = "Email не валиден")
+    @JsonProperty
     private String email;
 
     private Set<String> role;
 
-    @NotBlank
-    @Size(min = 6, max = 40)
+    @NotBlank(message = "Введите пароль")
+    @Size(min = 6, max = 40, message = "Длина пароля должна быть больше 6")
+    @JsonProperty
     private String password;
+
+//    @NotBlank(message = "Повторите пароль")
+    @Size(min = 6, max = 40, message = "Длина пароля должна быть больше 6")
+    @JsonProperty
+    private String retypePassword;
+
 
     private boolean guest;
 
@@ -64,5 +75,13 @@ public class SignupRequest {
 
     public void setGuest(boolean guest) {
         this.guest = guest;
+    }
+
+    public String getRetypePassword() {
+        return retypePassword;
+    }
+
+    public void setRetypePassword(String retypePassword) {
+        this.retypePassword = retypePassword;
     }
 }

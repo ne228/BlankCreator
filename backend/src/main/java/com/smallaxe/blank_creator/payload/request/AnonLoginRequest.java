@@ -3,7 +3,7 @@ package com.smallaxe.blank_creator.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class AnonLoginRequest {
-    @NotBlank
+    @NotBlank(message = "Введите имя пользователя")
     private String username;
 
     public String getUsername() {

@@ -1,10 +1,7 @@
 package com.smallaxe.blank_creator.blank.controller;
 
 import com.smallaxe.blank_creator.blank.entity.BlankHub;
-import com.smallaxe.blank_creator.blank.models.BlankCreateDto;
-import com.smallaxe.blank_creator.blank.models.BlankEditDto;
-import com.smallaxe.blank_creator.blank.models.BlankHubCreateDto;
-import com.smallaxe.blank_creator.blank.models.BlankHubEditDto;
+import com.smallaxe.blank_creator.blank.models.*;
 import com.smallaxe.blank_creator.blank.service.BlankService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +40,11 @@ public class BlankController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok().body(blankHub);
+    }
+
+    @GetMapping("/blanks")
+    public ResponseEntity<?> getAllBlanks() throws CredentialException {
+        return ResponseEntity.ok().body(blankService.getAllBlanks());
     }
 
     @PostMapping("/create")
@@ -85,6 +87,14 @@ public class BlankController {
         return ResponseEntity.ok().body(blank);
     }
 
+    @GetMapping("templates")
+    public ResponseEntity<?> getTemplates() throws CredentialException {
+        return ResponseEntity.ok().body(blankService.getBlankTemplates());
+    }
+    @PostMapping("templates/import")
+    public ResponseEntity<?> importTemplateById(@RequestBody ImportTemplateDto dto) throws CredentialException {
+        return ResponseEntity.ok().body(blankService.addBlankTemplateToHub(dto));
+    }
     @PostMapping("/blank/print/{hubId}")
     public ResponseEntity<?> printHub(@Valid @PathVariable String hubId, @RequestBody List<String> idsBlank) throws Exception {
         var hub = blankService.getHubById(hubId);

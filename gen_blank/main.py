@@ -32,5 +32,14 @@ def get_blank_pdf():
     file_name = os.path.basename(file_path)
     return send_file(file_path, as_attachment=True,  download_name=file_name)
 
+from dotenv import load_dotenv
+
+# Загружаем переменные окружения из .env файла
+load_dotenv('../.env')
+
+# Получаем значение порта из переменной окружения
+port = int(os.getenv('PY_PORT', 5005))  # 5005 - значение по умолчанию, если переменная не найдена
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5005)
+    app.run(host='0.0.0.0', port=port)

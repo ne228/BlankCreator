@@ -3,6 +3,8 @@ package com.smallaxe.blank_creator.service.auth;
 import com.smallaxe.blank_creator.entity.Role;
 import com.smallaxe.blank_creator.entity.User;
 import io.jsonwebtoken.Claims;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenUtil jwtUtil;
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 

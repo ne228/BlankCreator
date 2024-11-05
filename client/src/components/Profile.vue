@@ -2,14 +2,14 @@
 
   <v-row justify="center">
     <v-col>
-      <v-card class="d-flex flex-column" min-height="400px">
+      <v-card class="d-flex flex-column profile">
         <v-card-title>
           <v-icon left>mdi-account</v-icon>
-          <span>Профиль пользователя</span>
+          <span class="ml-2">Профиль пользователя</span>
         </v-card-title>
-
+        <v-divider></v-divider>
         <!-- Блок с информацией о пользователе -->
-        <v-card-subtitle>Информация о пользователе</v-card-subtitle>
+        <v-card-subtitle align="center" class="mt-2">Информация о пользователе</v-card-subtitle>
         <v-card-text class="flex-grow-1">
           <p v-if="user">
             <v-icon left>mdi-account-circle</v-icon>
@@ -26,8 +26,7 @@
         <v-divider></v-divider>
 
         <!-- Блок с действиями -->
-        <v-card-subtitle>Действия</v-card-subtitle>
-        <v-card-actions class="mt-auto">
+        <v-card-actions class="d-flex justify-end mt-auto">
           <v-btn @click="logout" color="primary">
             <v-icon left>mdi-logout</v-icon>
             Выйти
@@ -68,5 +67,7 @@ export default {
 </script>
 
 <style scoped>
-/* Добавьте стили здесь, если это необходимо */
+.profile{
+  height: 75vh;
+}
 </style>

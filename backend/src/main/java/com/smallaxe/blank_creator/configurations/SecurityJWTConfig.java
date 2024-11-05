@@ -1,12 +1,10 @@
 package com.smallaxe.blank_creator.configurations;
 
 
-import com.smallaxe.blank_creator.service.auth.JwtTokenFilter;
 import com.smallaxe.blank_creator.repositories.UserRepository;
-//import com.example.ais_ecc.service.DbInit;
 import com.smallaxe.blank_creator.service.DbInit;
+import com.smallaxe.blank_creator.service.auth.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +17,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,7 +30,10 @@ public class SecurityJWTConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DbInit dbInit;
 
-    @Autowired private JwtTokenFilter jwtTokenFilter;
+
+    @Autowired
+    private JwtTokenFilter jwtTokenFilter;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -56,10 +56,11 @@ public class SecurityJWTConfig extends WebSecurityConfigurerAdapter {
 
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 
 
-//    @Bean
+    //    @Bean
 //    public CorsConfigurationSource corsConfigurationSource() {
 //        CorsConfiguration configuration = new CorsConfiguration();
 //        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));

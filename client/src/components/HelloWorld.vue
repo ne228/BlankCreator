@@ -2,7 +2,7 @@
   <v-row>
     <v-col>
       <div class="section">
-        <h1 align="center">Справочный Центр</h1>
+        <h1 class="mb-2" align="center">Справочный Центр</h1>
         <p>
           Наш сервис позволяет легко и удобно создавать, редактировать, печатать и хранить справки в одном
           месте. На сайте пользователи могут добавлять данные для своих справок, проверять их статусы и при
@@ -15,7 +15,7 @@
   </v-row>
   <h2 align="center">Как это работает?</h2>
   <v-row>
-    <v-col>
+    <v-col >
       <div class="section">
 
         <h3 align="center">Для пользователей:</h3>
@@ -57,7 +57,7 @@
         </ul>
         <div align="center" class="mt-2">
           <RouterLink to="/hub">
-            <v-btn color="primary" prepend-icon="mdi-folder">Хранилища</v-btn>
+            <v-btn size="small"  color="primary" prepend-icon="mdi-folder">Хранилища</v-btn>
           </RouterLink>
         </div>
 
@@ -115,6 +115,7 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  min-width: 250px;
 }
 
 h2 {

@@ -11,6 +11,7 @@ import BlankHubs from '@/components/blank/BlankHubs.vue'
 import BlankEdit from '@/components/blank/BlankEdit.vue'
 import BlankHubCreate from '@/components/blank/BlankHubCreate.vue'
 import BlankHubRed from '@/components/blank/BlankHubRed.vue'
+import AllBlanks from '@/components/blank/AllBlanks.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,6 +70,11 @@ const router = createRouter({
       path: '/hub/edit/:id',
       name: 'BlankHubRed',
       component: BlankHubRed
+    },
+    {
+      path: '/blanks',
+      name: 'AllBlanks',
+      component: AllBlanks
     }
   ]
 })

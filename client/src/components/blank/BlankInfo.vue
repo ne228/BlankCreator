@@ -1,26 +1,27 @@
 <template>
     <v-container class="form-container" v-if="data != null">
         <!-- Личные данные -->
+       
         <v-card class="mb-4">
-            <v-card-title align="center">Данные о справке {{ data.id }}</v-card-title>
+            <h3 align="center">Данные о справке {{ data.id }}</h3>
             <v-card-text>
                 <v-list>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Создатель справки:</strong> {{ data.user.username
-                                }}</v-list-item-title>
+                            <div><strong>Создатель справки:</strong> {{ data.user.username
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Дата создания справки:</strong> {{ data.dateCreate
-                                }}</v-list-item-title>
+                            <div><strong>Дата создания справки:</strong> {{ data.dateCreate
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Статус справки:</strong> {{ data.blankStatus
-                                }}</v-list-item-title>
+                            <div><strong>Статус справки:</strong> {{ data.blankStatus
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
@@ -32,28 +33,28 @@
                 <v-list>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Пользователь:</strong> {{ data.user.username
-                                }}</v-list-item-title>
+                            <div><strong>Пользователь:</strong> {{ data.user.username
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>ФИО:</strong> {{ data.name }}</v-list-item-title>
+                            <div><strong>ФИО:</strong> {{ data.name }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Дата рождения:</strong> {{ data.dateBirth }}</v-list-item-title>
+                            <div><strong>Дата рождения:</strong> {{ data.dateBirth }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Должность:</strong> {{ data.duty }}</v-list-item-title>
+                            <div><strong>Должность:</strong> {{ data.duty }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Звание:</strong> {{ data.rank }}</v-list-item-title>
+                            <div><strong>Звание:</strong> {{ data.rank }}</div>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
@@ -66,15 +67,15 @@
             <v-card-text>
                 <v-list>
                     <v-list-item>
-                        <v-list-item-content>
-                            <v-list-item-title><strong>Дата приказа о назначении на должность:</strong> {{ data.datePr
-                                }}</v-list-item-title>
+                        <v-list-item-content class="text-break">
+                            <div><strong>Дата приказа о назначении на должность:</strong> {{ data.datePr
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Номер приказа о назначении на должность:</strong> {{ data.numPr
-                                }}</v-list-item-title>
+                            <div><strong>Номер приказа о назначении на должность:</strong> {{ data.numPr
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
@@ -88,19 +89,19 @@
                 <v-list>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Дата начала обучения:</strong> {{ data.dateEnrollment
-                                }}</v-list-item-title>
+                            <div><strong>Дата начала обучения:</strong> {{ data.dateEnrollment
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Лет обучения:</strong> {{ data.trm }}</v-list-item-title>
+                            <div><strong>Лет обучения:</strong> {{ data.trm }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Дата окончания учебы:</strong> {{ data.dateEnd
-                                }}</v-list-item-title>
+                            <div><strong>Дата окончания учебы:</strong> {{ data.dateEnd
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
@@ -114,13 +115,13 @@
                 <v-list>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Место назначения справки:</strong> {{ data.place
-                                }}</v-list-item-title>
+                            <div><strong>Место назначения справки:</strong> {{ data.place
+                                }}</div>
                         </v-list-item-content>
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title><strong>Населенный пункт:</strong> {{ data.town }}</v-list-item-title>
+                            <div><strong>Населенный пункт:</strong> {{ data.town }}</div>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>

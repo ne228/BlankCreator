@@ -18,6 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(vueUrl, "http://localhost:5173", "http://192.168.184.12:5173") // Разрешить этот источник
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Разрешить методы
                 .allowedHeaders("*") // Разрешить все заголовки
-                .allowCredentials(true); // Разрешить отправку куки
+                .allowCredentials(true)
+                .allowedOriginPatterns("*"); // Разрешить отправку куки
     }
 }
