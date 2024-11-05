@@ -7,6 +7,12 @@ services:
       dockerfile: Dockerfile
     environment:
         - SPRING_PROFILES_ACTIVE=docker
+        - SERVER_IP=${SERVER_IP}
+        - JAVA_PORT=${JAVA_PORT}
+        - VUE_IP=${VUE_IP}
+        - VUE_PORT=${VUE_PORT}
+        - PY_IP=${PY_IP}
+        - PY_PORT=${PY_PORT}       
     ports:
       - "${JAVA_PORT}:${JAVA_PORT}"
 

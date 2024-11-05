@@ -9,8 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${vue_url}")
-    private String vueUrl;
+    //@Value("${vue_url}")
+    private String vueUrl = "http://194.58.66.113:5173";
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

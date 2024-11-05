@@ -13,3 +13,11 @@ services:
       - .:/app  # Монтируем текущую директорию в контейнер
     environment:
       - FLASK_ENV=development  # Устанавливаем переменную окружения для режима разработки
+      - SERVER_IP=${SERVER_IP}
+      - JAVA_PORT=${JAVA_PORT}
+      - VUE_IP=${VUE_IP}
+      - VUE_PORT=${VUE_PORT}
+      - VITE_JAVA_IP=${VITE_JAVA_IP}
+      - VITE_JAVA_PORT=${VITE_JAVA_PORT}
+      - PY_IP=${PY_IP}
+      - PY_PORT=${PY_PORT}

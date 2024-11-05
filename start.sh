@@ -1,7 +1,6 @@
 #!/bin/bash
-
+source ./export.sh
 # Массив с путями до docker-compose.yaml
-exit;
 paths=(
     "backend/docker-compose.yaml"
     "client/docker-compose.yaml"
@@ -9,7 +8,7 @@ paths=(
     # добавьте другие пути по мере необходимости
 )
 
-# Проход по каждому пути и выполнение команды docker-compose down
+# Проход по каждому пути и выполнение команды docker-compose build and up
 for path in "${paths[@]}"; do
     # Переход в директорию, содержащую docker-compose.yaml
     dir=$(dirname "$path")
@@ -17,11 +16,12 @@ for path in "${paths[@]}"; do
 
     # Переход в нужную директорию
     cd "$dir" || { echo "Не удалось перейти в директорию $dir"; continue; }
-
-    # Выполнение docker-compose down
-    docker compose down
+    
+    cp "../.env" ".env"
+    # Выполнение docker-compose build и up
+    docker compose down  # Можно оставить, если хотите остановить контейнеры перед перезапуском
     docker compose build
-    docker compose --env-file ..\.env up -d
+    docker compose --env-file ".env" up -d
 
     # Возврат в исходную директорию (если нужно)
     cd - > /dev/null
