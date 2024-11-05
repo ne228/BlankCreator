@@ -18,7 +18,7 @@ for path in "${paths[@]}"; do
     cd "$dir" || { echo "Не удалось перейти в директорию $dir"; continue; }
 
     # Выполнение docker-compose down
-    docker compose down
+    docker compose --env-file ..\.env down
 
     # Возврат в исходную директорию (если нужно)
     cd - > /dev/null
