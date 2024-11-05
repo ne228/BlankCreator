@@ -24,6 +24,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.CredentialException;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -49,7 +50,7 @@ public class BlankService {
 
     }
 
-    public BlankHub blankCreate(BlankHubCreateDto blankHubCreateDto) {
+    public BlankHub blankCreate(BlankHubCreateDto blankHubCreateDto) throws CredentialException {
         var blankHub = blankHubCreateDto.toEntity();
         blankHub.setDateCreate(LocalDateTime.now());
         blankHub.setUser(authService.getCurrentUser());
@@ -59,7 +60,7 @@ public class BlankService {
         return blankHub;
     }
 
-    public BlankHub blankHubEdit(BlankHubEditDto blankHubEditDto) {
+    public BlankHub blankHubEdit(BlankHubEditDto blankHubEditDto) throws CredentialException {
         var blankHub = getHubById(blankHubEditDto.getId());
         if (blankHub == null)
             throw new ObjectNotFoundException(blankHubEditDto.getId(), "Не найден hub с id " + blankHubEditDto.getId());
@@ -76,7 +77,7 @@ public class BlankService {
         return blankHub;
     }
 
-    public Blank blankCreate(BlankCreateDto dto) {
+    public Blank blankCreate(BlankCreateDto dto) throws CredentialException {
         var blankHub = getHubById(dto.getHubId());
         Blank blank = dto.toEntity();
         blank.setDateCreate(LocalDateTime.now());
@@ -92,12 +93,12 @@ public class BlankService {
         return blank;
     }
 
-    public List<BlankHub> getHubs() {
+    public List<BlankHub> getHubs() throws CredentialException {
         var currentUser = authService.getCurrentUser();
         return blankHubRepository.findBlankHubByUser_Id(currentUser.getId(), Sort.by(Sort.Direction.DESC, "dateCreate"));
     }
 
-    public BlankHub getHubById(String id) {
+    public BlankHub getHubById(String id) throws CredentialException {
         var currentUser = authService.getCurrentUser();
         var hub = blankHubRepository.findById(id).orElse(null);
         if (hub == null) throw new ObjectNotFoundException(id, "Хранилище не найдено");
@@ -112,7 +113,7 @@ public class BlankService {
     }
 
 
-    public Blank getBlankById(String blankId) {
+    public Blank getBlankById(String blankId) throws CredentialException {
         var blank = blankRepository.findBlankById(blankId);
         if (blank == null) throw new ObjectNotFoundException(blankId, "Справка не найдена");
 
@@ -123,7 +124,7 @@ public class BlankService {
         return blank;
     }
 
-    public Blank editBlank(BlankEditDto dto) {
+    public Blank editBlank(BlankEditDto dto) throws CredentialException {
         // Validation
         var blank = getBlankById(dto.getId());
         if (blank == null) throw new ObjectNotFoundException(dto.getId(), "Не найден бланк с id " + dto.getId());
@@ -138,7 +139,7 @@ public class BlankService {
         return blank;
     }
 
-    public Blank rejectBlank(String blankId) {
+    public Blank rejectBlank(String blankId) throws CredentialException {
         // Validation
         var blank = getBlankById(blankId);
         if (blank == null) throw new ObjectNotFoundException(blankId, "Не найден бланк с id " + blankId);
@@ -154,7 +155,7 @@ public class BlankService {
         return blank;
     }
 
-    public Blank successBlank(String blankId) {
+    public Blank successBlank(String blankId) throws CredentialException {
         // Validation
         var blank = getBlankById(blankId);
         if (blank == null) throw new ObjectNotFoundException(blankId, "Не найден бланк с id " + blankId);

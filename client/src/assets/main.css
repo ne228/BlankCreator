@@ -1,5 +1,5 @@
 @media screen and (max-width: 600px) {
-  h1 {
+  /* h1 {
     font-size: 1em;
   }
   h2 {
@@ -15,8 +15,8 @@
     font-size: 0.6em;
   }
   span {
-    font-size: 0.8em;
-  }
+    font-size: 20px;
+  } */
 }
 .v-slide-group__content {
   justify-content: center;

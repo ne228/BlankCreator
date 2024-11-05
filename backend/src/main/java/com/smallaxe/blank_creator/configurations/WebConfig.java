@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Разрешить все запросы
-                .allowedOrigins(vueUrl, "http://localhost:5173") // Разрешить этот источник
+                .allowedOrigins(vueUrl, "http://localhost:5173", "http://192.168.184.12:5173") // Разрешить этот источник
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Разрешить методы
                 .allowedHeaders("*") // Разрешить все заголовки
                 .allowCredentials(true); // Разрешить отправку куки

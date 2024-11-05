@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.login.CredentialException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,13 +31,13 @@ public class BlankController {
 
 
     @GetMapping("")
-    public ResponseEntity<?> getHubs() {
+    public ResponseEntity<?> getHubs() throws CredentialException {
         return ResponseEntity.ok().body(blankService.getHubs());
     }
 
 
     @GetMapping("/get")
-    public ResponseEntity<?> getBlanksByHubId(@RequestParam String id) {
+    public ResponseEntity<?> getBlanksByHubId(@RequestParam String id) throws CredentialException {
         BlankHub blankHub = blankService.getHubById(id);
         if (blankHub == null)
             return ResponseEntity.notFound().build();
@@ -45,41 +46,41 @@ public class BlankController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> hubCreate(@Valid @RequestBody BlankHubCreateDto blankHubCreateDto) {
+    public ResponseEntity<?> hubCreate(@Valid @RequestBody BlankHubCreateDto blankHubCreateDto) throws CredentialException {
         return ResponseEntity.ok().body(blankService.blankCreate(blankHubCreateDto));
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<?> hubEdit(@Valid @RequestBody BlankHubEditDto blankHubEditDto) {
+    public ResponseEntity<?> hubEdit(@Valid @RequestBody BlankHubEditDto blankHubEditDto) throws CredentialException {
         return ResponseEntity.ok().body(blankService.blankHubEdit(blankHubEditDto));
     }
 
     @PostMapping("/blank/create")
-    public ResponseEntity<?> createBlank(@Valid @RequestBody BlankCreateDto blankCreateDto) {
+    public ResponseEntity<?> createBlank(@Valid @RequestBody BlankCreateDto blankCreateDto) throws CredentialException {
         return ResponseEntity.ok().body(blankService.blankCreate(blankCreateDto));
     }
 
 
     @PostMapping("/blank/edit")
-    public ResponseEntity<?> editBlank(@Valid @RequestBody BlankEditDto blankEditDto) {
+    public ResponseEntity<?> editBlank(@Valid @RequestBody BlankEditDto blankEditDto) throws CredentialException {
         return ResponseEntity.ok().body(blankService.editBlank(blankEditDto));
     }
 
     @GetMapping("/blank/{id}")
-    public ResponseEntity<?> getBlank(@Valid @PathVariable String id) {
+    public ResponseEntity<?> getBlank(@Valid @PathVariable String id) throws CredentialException {
         var blank = blankService.getBlankById(id);
         return ResponseEntity.ok().body(blank);
     }
 
 
     @PostMapping("/blank/success/{id}")
-    public ResponseEntity<?> successBlank(@Valid @PathVariable String id) {
+    public ResponseEntity<?> successBlank(@Valid @PathVariable String id) throws CredentialException {
         var blank = blankService.successBlank(id);
         return ResponseEntity.ok().body(blank);
     }
 
     @PostMapping("/blank/reject/{id}")
-    public ResponseEntity<?> rejectBlank(@Valid @PathVariable String id) {
+    public ResponseEntity<?> rejectBlank(@Valid @PathVariable String id) throws CredentialException {
         var blank = blankService.rejectBlank(id);
         return ResponseEntity.ok().body(blank);
     }
