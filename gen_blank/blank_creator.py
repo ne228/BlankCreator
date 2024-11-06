@@ -43,9 +43,11 @@ def replace_keywords_in_paragraph(paragraph, replacements):
         for run in paragraph.runs:
             if key in run.text:
                 # Обработка place
+                
                 if key == "place":
                     # Делим на подстроки
-                    sub_strs = split_text_by_length(replacements["place"])    
+                    sub_strs = split_text_by_length(replacements["place"]) 
+                      
                     # если подстрок больше 1, то оставшуюсую часть place вставляем в town
                     if len(sub_strs) > 1:
                         first, *second = sub_strs
