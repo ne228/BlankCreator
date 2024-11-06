@@ -10,6 +10,7 @@
               v-model="form.rank"
               :rules="rules.required"
               label="Звание"
+              hint="Например: рядовой полиции"
               required
             ></v-text-field>
           </v-col>
@@ -18,6 +19,7 @@
               v-model="form.name"
               :rules="rules.required"
               label="Фамили И.О."
+              hint="Например: Иванов И.И."
               required
             ></v-text-field>
           </v-col>
@@ -27,6 +29,7 @@
               :rules="rules.dateFormat"
               label="Дата рождения (dd.MM.yyyy)"
               placeholder="dd.MM.yyyy"
+              hint="Например: 12.01.2004"
               @input="validateDateInput('dateBirth', $event)"
             ></v-text-field>
           </v-col>
@@ -35,6 +38,7 @@
               v-model="form.duty"
               :rules="rules.required"
               label="Должность (в родительном падеже)"
+              hint="Например: курсанта"
               required
             ></v-text-field>
           </v-col>
@@ -53,6 +57,7 @@
               v-model="form.trm"
               :rules="rules.required"
               label="Срок обучения (лет)"
+              hint="Например: 5"
               required
             ></v-text-field>
           </v-col>
@@ -61,6 +66,7 @@
               type="number"
               v-model="form.dateEnd"
               :rules="[rules.required]"
+              hint="Например: 2026"
               label="Год окончания"
             ></v-text-field>
           </v-col>
@@ -77,7 +83,7 @@
             <v-text-field
               v-model="form.place"
               :rules="rules.required"
-              label="Место назначения справки"
+              hint="Например: МФЦ Центрального района"
               required
             ></v-text-field>
           </v-col>
@@ -86,6 +92,17 @@
               v-model="form.town"
               :rules="rules.required"
               label="Город"
+              hint="Например :г. Санкт-Петербург"
+              required
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="form.reason"
+              :rules="rules.required"
+              label="Для каких целей справка?"
+              hint="Например: в налоговый учет"
               required
             ></v-text-field>
           </v-col>
@@ -112,7 +129,7 @@
       </v-col>
     </v-row>
 
-    <p v-for="err in error" class="text--red"> {{ err.defaultMessage }}</p>
+    <p v-for="err in error" class="text--red">{{ err.defaultMessage }}</p>
 
     <v-snackbar v-model="snackbar.show" :timeout="3000" color="success">
       {{ snackbar.message }}
@@ -126,7 +143,7 @@ import { post } from '@/services/apiService'
 
 export default {
   data() {
-    const testData = true
+    const testData = false
     return {
       valid: false,
       form: {
@@ -142,12 +159,15 @@ export default {
         dateEnd: testData ? '2030' : '',
         place: testData ? 'МФЦ Благовещенский' : '',
         town: testData ? 'г. Благовещенск' : '',
+        reason: testData ? 'В налоговый учет' : '',
         saveAsTemplate: testData ? true : false
       },
       rules: {
         required: [(v) => !!v || 'Это поле обязательно'],
         dateFormat: [
-          (v) =>  /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/.test(v) || 'Неверный формат даты (dd.MM.yyyy)',
+          (v) =>
+            /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/.test(v) ||
+            'Неверный формат даты (dd.MM.yyyy)'
         ]
       },
       snackbar: {
@@ -179,11 +199,11 @@ export default {
           console.log('Response:', response.id)
           this.$router.push(`/hub/${this.$route.params.hubId}/blank/${response.id}`)
         } catch (error) {
-           this.error = error.response.data.errors || 'Произошла ошибка.'
+          this.error = error.response.data.errors || 'Произошла ошибка.'
           console.error('Error sending data:', error)
         }
       }
-      console.log(this.$refs.form);
+      console.log(this.$refs.form)
     }
   }
 }

@@ -65,9 +65,12 @@
                             {{ item.user.username }}
                         </td>
                         <td :data-label="headers[2].text">
-                            {{ item.blankStatus }}
+                            {{ item.reason }}
                         </td>
                         <td :data-label="headers[3].text">
+                            {{ item.blankStatus }}
+                        </td>
+                        <td :data-label="headers[4].text">
                             {{ item.dateCreate }}
                         </td>
                         <td class="d-flex justify-center" :data-label="headers[4].text">
@@ -143,6 +146,7 @@ export default {
             headers: [
                 { text: 'ID', value: 'id' },
                 { text: 'Пользователь', value: 'user.username' },
+                { text: 'Цель', value: 'reason' },
                 { text: 'Статус', value: 'blankStatus' },
                 { text: 'Дата создания', value: 'dateCreate' },
                 { text: 'Действия', value: 'actions' }

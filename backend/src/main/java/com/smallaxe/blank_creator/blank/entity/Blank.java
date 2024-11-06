@@ -51,6 +51,9 @@ public class Blank {
     @Column(name = "town", nullable = false)
     private String town;  // Город
 
+    @Column(name = "reason", nullable = true)
+    private String reason;  // reason
+
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -251,5 +254,13 @@ public class Blank {
 
     public void setHub(BlankHub hub) {
         this.hub = hub;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

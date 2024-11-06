@@ -41,6 +41,9 @@ public class BlankTemplate {
     @Column(name = "town", nullable = false)
     private String town;  // Город
 
+
+    @Column(name = "reason", nullable = true)
+    private String reason;  // reason
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -59,6 +62,7 @@ public class BlankTemplate {
         blank.setDateEnd(this.dateEnd);
         blank.setPlace(this.place);
         blank.setTown(this.town);
+        blank.setReason(this.reason);
         return blank;
     }
 
@@ -71,6 +75,7 @@ public class BlankTemplate {
         this.setDateEnd(blank.getDateEnd());
         this.setPlace(blank.getPlace());
         this.setTown(blank.getTown());
+        this.setReason(blank.getReason());
     }
 
     public String getId() {
@@ -160,5 +165,13 @@ public class BlankTemplate {
 
     public void setDateCreate(LocalDateTime dateCreate) {
         this.dateCreate = dateCreate;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

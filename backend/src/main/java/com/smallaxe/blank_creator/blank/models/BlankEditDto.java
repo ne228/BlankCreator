@@ -44,6 +44,11 @@ public class BlankEditDto {
     @NotBlank(message = "Введите город назначения справки")
     private String town;
 
+
+    @JsonProperty
+    @NotBlank(message = "Введите причину")
+    private String reason;
+
     // Метод toEntity
     public Blank toEntity() {
         Blank blank = new Blank();
@@ -56,6 +61,7 @@ public class BlankEditDto {
         blank.setDateEnd(this.dateEnd);
         blank.setPlace(this.place);
         blank.setTown(this.town);
+        blank.setReason(this.reason);
         return blank;
     }
 
@@ -69,6 +75,7 @@ public class BlankEditDto {
         blank.setDateEnd(this.dateEnd);
         blank.setPlace(this.place);
         blank.setTown(this.town);
+        blank.setReason(this.reason);
         return blank;
     }
 
@@ -150,5 +157,13 @@ public class BlankEditDto {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

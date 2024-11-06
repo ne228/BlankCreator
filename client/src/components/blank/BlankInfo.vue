@@ -124,6 +124,11 @@
                             <div><strong>Населенный пункт:</strong> {{ data.town }}</div>
                         </v-list-item-content>
                     </v-list-item>
+                    <v-list-item>
+                        <v-list-item-content>
+                            <div><strong>Цель справки:</strong> {{ data.reason }}</div>
+                        </v-list-item-content>
+                    </v-list-item>
                 </v-list>
             </v-card-text>
         </v-card>

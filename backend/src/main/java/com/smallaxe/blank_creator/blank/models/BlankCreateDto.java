@@ -45,6 +45,10 @@ public class BlankCreateDto {
     private String town;
 
     @JsonProperty
+    @NotBlank(message = "Введите причину")
+    private String reason;
+
+    @JsonProperty
     private boolean saveAsTemplate;
     // Метод toEntity
     public Blank toEntity() {
@@ -58,6 +62,7 @@ public class BlankCreateDto {
         blank.setDateEnd(this.dateEnd);
         blank.setPlace(this.place);
         blank.setTown(this.town);
+        blank.setReason(this.reason);
         return blank;
     }
 
@@ -148,5 +153,13 @@ public class BlankCreateDto {
 
     public void setSaveAsTemplate(boolean saveAsTemplate) {
         this.saveAsTemplate = saveAsTemplate;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

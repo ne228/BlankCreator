@@ -1,8 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid" lazy-validation>
     <v-container class="form-container">
-      <!-- Личные данные -->
-      <v-card-title align="center">Редактирование справки {{ form.id }}</v-card-title>
       <v-card class="mb-4">
         <v-card-title>Личные данные</v-card-title>
         <v-card-text>
@@ -12,6 +10,7 @@
                 v-model="form.rank"
                 :rules="rules.required"
                 label="Звание"
+                hint="Например: рядовой полиции"
                 required
               ></v-text-field>
             </v-col>
@@ -20,6 +19,7 @@
                 v-model="form.name"
                 :rules="rules.required"
                 label="Фамили И.О."
+                hint="Например: Иванов И.И."
                 required
               ></v-text-field>
             </v-col>
@@ -29,6 +29,7 @@
                 :rules="rules.dateFormat"
                 label="Дата рождения (dd.MM.yyyy)"
                 placeholder="dd.MM.yyyy"
+                hint="Например: 12.01.2004"
                 @input="validateDateInput('dateBirth', $event)"
               ></v-text-field>
             </v-col>
@@ -37,6 +38,7 @@
                 v-model="form.duty"
                 :rules="rules.required"
                 label="Должность (в родительном падеже)"
+                hint="Например: курсанта"
                 required
               ></v-text-field>
             </v-col>
@@ -51,16 +53,20 @@
           <v-row>
             <v-col cols="12" md="6">
               <v-text-field
+                type="number"
                 v-model="form.trm"
                 :rules="rules.required"
-                label="Срок обучения"
+                label="Срок обучения (лет)"
+                hint="Например: 5"
                 required
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
               <v-text-field
+                type="number"
                 v-model="form.dateEnd"
-                :rules="rules.required"
+                :rules="[rules.required]"
+                hint="Например: 2026"
                 label="Год окончания"
               ></v-text-field>
             </v-col>
@@ -77,7 +83,7 @@
               <v-text-field
                 v-model="form.place"
                 :rules="rules.required"
-                label="Место назначения справки"
+                hint="Например: МФЦ Центрального района"
                 required
               ></v-text-field>
             </v-col>
@@ -86,6 +92,17 @@
                 v-model="form.town"
                 :rules="rules.required"
                 label="Город"
+                hint="Например :г. Санкт-Петербург"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="6">
+              <v-text-field
+                v-model="form.reason"
+                :rules="rules.required"
+                label="Для каких целей справка?"
+                hint="Например: в налоговый учет"
                 required
               ></v-text-field>
             </v-col>
@@ -134,7 +151,8 @@ export default {
         trm: testData ? '5' : '',
         dateEnd: testData ? '01.09.2025' : '',
         place: testData ? 'МФЦ Благовещенский' : '',
-        town: testData ? 'г. Благовещенск' : ''
+        town: testData ? 'г. Благовещенск' : '',
+        reason: testData ? 'В налоговый учет' : ''
       },
       rules: {
         required: [(v) => !!v || 'Это поле обязательно'],
