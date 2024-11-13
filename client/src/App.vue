@@ -13,20 +13,20 @@ import { RouterView } from 'vue-router'
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
           </template> -->
           <RouterLink to="/" class="ml-5">
-            <v-btn variant="outlined" color="primary" prepend-icon="mdi-file-document">
+            <v-btn variant="outlined"  prepend-icon="mdi-file-document">
               <h3>Справочный Центр</h3>
             </v-btn>
           </RouterLink>
           <v-spacer></v-spacer>
 
           <RouterLink to="/">
-            <v-btn icon color="black">
+            <v-btn icon>
               <v-icon>mdi-home</v-icon>
             </v-btn>
           </RouterLink>
 
           <RouterLink v-if="isAuthenticated" to="/blanks">
-            <v-btn icon color="black">
+            <v-btn icon>
               <v-icon>mdi-file-document</v-icon>
             </v-btn>
           </RouterLink>

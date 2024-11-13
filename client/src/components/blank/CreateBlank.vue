@@ -83,6 +83,7 @@
             <v-text-field
               v-model="form.place"
               :rules="rules.required"
+              label="Место требования"
               hint="Например: МФЦ Центрального района"
               required
             ></v-text-field>
@@ -115,7 +116,8 @@
       <v-card-text>
         <v-row>
           <v-col cols="12" md="6">
-            <v-switch v-model="form.saveAsTemplate" label="Сохранить как шаблон" inset></v-switch>
+            <v-switch 
+            color="primary" v-model="form.saveAsTemplate" label="Сохранить как шаблон"></v-switch>
           </v-col>
         </v-row>
       </v-card-text>

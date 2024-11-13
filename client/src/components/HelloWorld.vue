@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col>
-      <div class="section">
+      <v-card class="section">
         <h1 class="mb-2" align="center">Справочный Центр</h1>
         <p>
           Наш сервис позволяет легко и удобно создавать, редактировать, печатать и хранить справки в одном
@@ -10,13 +10,13 @@
           доступ к нему и следя за состоянием справок всех пользователей.
         </p>
 
-      </div>
+      </v-card>
     </v-col>
   </v-row>
   <h2 align="center">Как это работает?</h2>
   <v-row>
     <v-col >
-      <div class="section">
+      <v-card class="section">
 
         <h3 align="center">Для пользователей:</h3>
         <p>
@@ -37,11 +37,11 @@
           <li><strong>Вопросы и поддержка:</strong> Если у вас возникли вопросы или проблемы, свяжитесь с
             администратором, который предоставил вам ссылку.</li>
         </ul>
-      </div>
+      </v-card>
     </v-col>
 
     <v-col>
-      <div class="section">
+      <v-card class="section">
         <h3 align="center">Для администратора:</h3>
         <p>
           Администратор создаёт хранилище справок и контролирует доступ к нему, отправляя пользователям ссылки
@@ -62,13 +62,13 @@
         </div>
 
 
-      </div>
+      </v-card>
     </v-col>
   </v-row>
 
   <v-row>
     <v-col>
-      <div class="section">
+      <v-card class="section">
         <h2>Инструкция по началу работы</h2>
         <p>1. Если вы <strong>Пользователь</strong>, перейдите по ссылке, авторизуйтесь, добавьте данные о справке и
           следите за её статусом.</p>
@@ -76,19 +76,19 @@
           </RouterLink> и
           отправки ссылки для доступа к
           нему пользователям.</p>
-      </div>
+      </v-card>
     </v-col>
   </v-row>
 
   <v-row>
     <v-col>
-      <div class="section">
+      <v-card class="section">
         <h2>Контакты поддержки</h2>
         <p>
           Если у вас возникли вопросы, обращайтесь к администратору, который предоставил вам ссылку, для получения
           помощи и поддержки.
         </p>
-      </div>
+      </v-card>
     </v-col>
   </v-row>
 </template>
@@ -111,9 +111,7 @@ export default {
 
 .section {
   margin-bottom: 40px;
-  background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   min-width: 250px;
 }
@@ -124,7 +122,6 @@ h2 {
 
 .image {
   max-height: 100px;
-
   height: auto;
   border-radius: 8px;
 }

@@ -30,6 +30,7 @@ public class BlankEditDto {
     private String duty;
 
 
+
     @JsonProperty
     @NotBlank(message = "Введите срок обучения")
     private String trm;

@@ -83,6 +83,7 @@
               <v-text-field
                 v-model="form.place"
                 :rules="rules.required"
+                label="Место требования"
                 hint="Например: МФЦ Центрального района"
                 required
               ></v-text-field>
