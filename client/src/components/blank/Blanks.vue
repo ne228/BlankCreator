@@ -54,7 +54,7 @@
         label="Выбрать все"
       >
       </v-checkbox-btn>
-      <v-table density="compact">
+      <table>
         <thead>
           <tr>
             <th>
@@ -134,7 +134,7 @@
             </td>
           </tr>
         </tbody>
-      </v-table>
+      </table>
     </div>
   </div>
   <v-snackbar v-model="snackbar.show" :timeout="3000" color="success">
@@ -319,6 +319,33 @@ export default {
   max-width: 1000px;
 }
 
+.table-wrap {
+  text-align: center;
+  background-color: #fff;
+  padding: 0.3rem 0.3rem;
+  color: #000;
+}
+
+table {
+  border: 1px solid #ccc;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table tr {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+  /* border-right: 1px solid #ddd; */
+}
 
 table th {
   /* color: #fff;
@@ -356,7 +383,7 @@ table th {
     display: block;
     text-align: right;
     font-size: 13px;
-    /* border-bottom: 1px dotted #ccc; */
+    border-bottom: 1px dotted #ccc;
     border-right: 1px solid transparent;
     justify-content: space-between !important;
   }

@@ -8,6 +8,8 @@ import com.smallaxe.blank_creator.blank.entity.Blank;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.Queue;
 
 //@Data
 //@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -29,7 +31,8 @@ public class BlankEditDto {
     @NotBlank(message = "Введите должность")
     private String duty;
 
-
+    LinkedList<String> linkedList;
+    Queue<String> queue;
 
     @JsonProperty
     @NotBlank(message = "Введите срок обучения")
