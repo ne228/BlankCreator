@@ -146,7 +146,7 @@ import HubService from '@/services/hubApi';
 
 export default {
   data() {
-    const testData = true
+    const testData = false
     return {
       valid: false,
       hubService: new HubService(),

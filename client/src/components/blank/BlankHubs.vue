@@ -73,8 +73,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue';
-import { getData, post } from '@/services/apiService';
+
 import router from '@/router';
 import HubService from '@/services/hubApi';
 

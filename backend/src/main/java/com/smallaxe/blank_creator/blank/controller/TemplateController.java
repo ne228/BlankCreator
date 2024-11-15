@@ -5,10 +5,7 @@ import com.smallaxe.blank_creator.blank.models.ImportTemplateDto;
 import com.smallaxe.blank_creator.blank.service.BLankTemplateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.CredentialException;
 
@@ -30,5 +27,10 @@ public class TemplateController {
     @PostMapping("/import")
     public ResponseEntity<?> importTemplateById(@RequestBody ImportTemplateDto dto) throws CredentialException {
         return ResponseEntity.ok().body(bLankTemplateService.addBlankTemplateToHub(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteTemplateById(@PathVariable String id) throws CredentialException {
+        return ResponseEntity.ok().body(bLankTemplateService.deleteBlankTemplate(id));
     }
 }

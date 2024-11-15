@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.security.auth.login.CredentialException;
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Service
 public class BlankTemplateServiceImpl implements BLankTemplateService {
 
@@ -23,7 +24,8 @@ public class BlankTemplateServiceImpl implements BLankTemplateService {
 
     @Autowired
     BlankRepository blankRepository;
-    @Autowired BlankHubService blankHubService;
+    @Autowired
+    BlankHubService blankHubService;
     @Autowired
     private AuthService authService;
 
@@ -59,5 +61,14 @@ public class BlankTemplateServiceImpl implements BLankTemplateService {
         blank.setHubId(blankHub.getId());
         blankRepository.save(blank);
         return blank;
+    }
+
+    @Override
+    public Integer deleteBlankTemplate(String id) {
+        if (!blankTemplateRepository.existsById(id))
+            throw new ObjectNotFoundException(id, "Не найден шаблон");
+
+        blankTemplateRepository.deleteById(id);
+        return 0;
     }
 }

@@ -1,5 +1,5 @@
 import { da } from 'vuetify/lib/locale/index.mjs'
-import apiService, { getData, post, put } from './apiService'
+import apiService, { getData, post, put, del} from './apiService'
 import hubApi from './hubApi'
 
 class HubService {
@@ -92,10 +92,17 @@ class HubService {
       throw error
     }
   }
-
   async templateImport(data) {
     try {
       return await post(`templates/import`, data)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async deleteTemplate(id) {
+    try {
+      return await del(`templates/${id}`)
     } catch (error) {
       throw error
     }

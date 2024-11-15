@@ -88,8 +88,8 @@
             <td :data-label="headers[4].text">
               {{ item.dateCreate }}
             </td>
-            <td class="d-flex justify-center" :data-label="headers[4].text">
-              <div class="d-flex flex-row">
+            <td class="d-flex justify-space-between" :data-label="headers[5].text">
+              <div class="d-flex flex-row jusify-center">
                 <div class="ma-1">
                   <RouterLink :to="`/hub/${this.hub.id}/blank/${item.id}`">
                     <v-btn :size="33" icon>
@@ -317,87 +317,88 @@ export default {
 
 <style scoped>
 .v-container {
-  max-width: 1000px;
+    max-width: 1000px;
 }
 
+
 .table-wrap {
-  text-align: center;
-  background-color: #fff;
-  padding: 0.3rem 0.3rem;
-  color: #000;
+    text-align: center;
+    background-color: #fff;
+    padding: 0.3rem 0.3rem;
+    color: #000;
 }
 
 table {
-  border: 1px solid #ccc;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border-collapse: collapse;
-  border-spacing: 0;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 table tr {
-  border: 1px solid #ddd;
-  padding: 5px;
+    border: 1px solid #ddd;
+    padding: 5px;
 }
 
 table th,
 table td {
-  padding: 10px;
-  text-align: center;
-  /* border-right: 1px solid #ddd; */
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #ddd;
 }
 
 table th {
-  /* color: #fff;
-  background-color: #444; */
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 1px;
+    color: #fff;
+    background-color: #444;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
 }
 
 .selectAll {
-  display: none;
+    display: none;
 }
 
+
 @media screen and (max-width: 600px) {
-  .selectAll {
-    display: block;
-  }
+    .selectAll {
+        display: block;
+    }
 
-  table {
-    border: 0;
-    width: 100%;
-  }
+    table {
+        border: 0;
+        width: 100%;
+    }
 
-  table thead {
-    display: none;
-  }
+    table thead {
+        display: none;
+    }
 
-  table tr {
-    margin-bottom: 10px;
-    display: block;
-    /* border-bottom: 2px solid #ddd; */
-  }
+    table tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #ddd;
+    }
 
-  table td {
-    display: block;
-    text-align: right;
-    font-size: 13px;
-    border-bottom: 1px dotted #ccc;
-    border-right: 1px solid transparent;
-    justify-content: space-between !important;
-  }
+    table td {
+        display: block;
+        text-align: right;
+        font-size: 13px;
+        border-bottom: 1px dotted #ccc;
+        border-right: 1px solid transparent;
+    }
 
-  table td:last-child {
-    border-bottom: 0;
-  }
+    table td:last-child {
+        border-bottom: 0;
+    }
 
-  table td:before {
-    content: attr(data-label);
-    float: left;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
+    table td:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
 }
 </style>

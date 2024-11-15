@@ -15,4 +15,5 @@ public interface BLankTemplateService {
 
      Blank addBlankTemplateToHub(ImportTemplateDto dto) throws CredentialException;
 
+    Integer deleteBlankTemplate(String id);
 }
