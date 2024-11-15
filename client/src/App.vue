@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router'
   <v-container>
     <div class="mx-auto">
       <v-layout>
-        <v-app-bar>
+        <v-app-bar color="primary" dark>
           <template v-slot:image> </template>
 
           <!-- <template v-slot:prepend>
@@ -66,48 +66,6 @@ import { RouterView } from 'vue-router'
       </v-layout>
     </div>
   </v-container>
-  <!-- <v-container>
-
-    <header>
-
-      <v-toolbar title="VGR">
-        <div class="navbar">
-
-          <RouterLink to="/hub">
-            <v-btn rounded="lg">
-              <v-icon>mdi-home</v-icon>
-              <p class="ml-1">Главная</p>
-            </v-btn>
-          </RouterLink>
-          <RouterLink v-if="isAuthenticated" to="/hub">
-            <v-btn rounded="lg" prepend-icon="mdi-folder">
-              <p class="ml-1">хранилища</p>
-            </v-btn>
-          </RouterLink>
-          <RouterLink v-if="isAuthenticated" to="/#">
-            <v-btn rounded="lg" prepend-icon="mdi-file-document">
-              <p class="ml-1">Справки</p>
-            </v-btn>
-          </RouterLink>
-
-          <RouterLink v-if="isAuthenticated" to="/profile">
-            <v-btn rounded="lg" prepend-icon="mdi-account" variant="">
-              <p class="ml-1">{{ username }}</p>
-            </v-btn>
-          </RouterLink>
-
-          <RouterLink v-if="!isAuthenticated" to="/login">
-            <v-btn rounded="lg" prepend-icon="mdi-account" variant="">
-              <p class="ml-1">ВХОД</p>
-            </v-btn>
-          </RouterLink>
-
-        </div>
-      </v-toolbar>
-    </header>
-
-    <router-view />
-  </v-container> -->
 </template>
 <script>
 import authService from '@/services/authService'
