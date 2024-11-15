@@ -10,14 +10,7 @@
         <!-- Блок с информацией о пользователе -->
         <!-- <v-card-subtitle align="center" class="mt-2">Информация о пользователе</v-card-subtitle> -->
         <v-card-text class="flex-grow-1">
-          <!-- <p v-if="user">
-            <v-icon left>mdi-account-circle</v-icon>
-            <strong class="ml-2"> {{ user.username }}</strong>
-          </p>
-          <p v-if="user" class="mt-2">
-            <v-icon left>mdi-email</v-icon>
-            <strong class="ml-2"> {{ user.email }}</strong>
-          </p> -->
+
           <div class="d-flex flex-wrap justify-space-around">
             <RouterLink class="ma-1" to="/blanks">
               <v-btn color="indigo">

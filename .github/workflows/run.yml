@@ -1,27 +1,34 @@
-# name: Run Tests on Master Commit
+name: Run Tests on Master Commit
 
-# on:
-#   push:
-#     branches:
-#       - master 
+on:
+  push:
+    branches:
+      - master 
 
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest  
+jobs:
+  test:
+    runs-on: ubuntu-latest  
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  
 
-#       - name: Set up JDK
-#         uses: actions/setup-java@v2
-#         with:
-#           distribution: 'temurin'
-#           java-version: '11'  
+      # - name: Set up JDK
+      #   uses: actions/setup-java@v2
+      #   with:
+      #     distribution: 'temurin'
+      #     java-version: '11'  
 
-      
-#       - name: Stop containers
-#         run: ./stop.sh 
-
-#       - name: Start containers
-#         run: mvn test  
+      # Добавим шаг деплоя
+      - name: Deploy to server via SSH
+        run: |
+          sudo apt-get install sshpass 
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd BlankCreator  # Переходим в папку с проектом на сервере
+            ./stop.sh
+            ./start.sh
+          EOF
+        env:
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}  # Пароль для SSH
+          SERVER_USER: ${{ secrets.SERVER_USER }}  # Имя пользователя на сервере
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}  # Адрес сервера
