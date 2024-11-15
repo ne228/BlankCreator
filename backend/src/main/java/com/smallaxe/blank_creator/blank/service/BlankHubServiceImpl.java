@@ -29,7 +29,28 @@ public class BlankHubServiceImpl implements BlankHubService {
     @Autowired
     private AuthService authService;
 
+    @Override
+    public List<BlankHub> getHubs() throws CredentialException {
+        var currentUser = authService.getCurrentUser();
 
+        return blankHubRepository.findBlankHubByUser_Id(currentUser.getId(), Sort.by(Sort.Direction.DESC, "dateCreate"));
+    }
+
+    @Override
+    public BlankHub getHubById(String id) throws CredentialException {
+        var hub = blankHubRepository.findBlankHubById(id);
+        if (hub == null) throw new ObjectNotFoundException(id, "Хранилище не найдено");
+
+        var currentUser = authService.getCurrentUser();
+        if (!isCanAccessToBlankHub(hub, currentUser))
+            hub.setBlankList(hub.getBlankList().stream().filter(blank -> blank.getUser().getId().equals(currentUser.getId())).collect(Collectors.toList()));
+
+        hub.setBlankList(hub.getBlankList()
+                .stream()
+                .sorted(Comparator.comparing(Blank::getDateCreate).reversed())
+                .collect(Collectors.toList()));
+        return hub;
+    }
     @Override
     public BlankHub create(BlankHubCreateDto blankHubCreateDto) throws CredentialException {
         var blankHub = blankHubCreateDto.toEntity();
@@ -60,26 +81,7 @@ public class BlankHubServiceImpl implements BlankHubService {
         return blankHub;
     }
 
-    @Override
-    public List<BlankHub> getHubs() throws CredentialException {
-        var currentUser = authService.getCurrentUser();
-        return blankHubRepository.findBlankHubByUser_Id(currentUser.getId(), Sort.by(Sort.Direction.DESC, "dateCreate"));
-    }
 
-    @Override
-    public BlankHub getHubById(String id) throws CredentialException {
-        var currentUser = authService.getCurrentUser();
-        var hub = blankHubRepository.findById(id).orElse(null);
-        if (hub == null) throw new ObjectNotFoundException(id, "Хранилище не найдено");
-        if (!isCanAccessToBlankHub(hub, currentUser))
-            hub.setBlankList(hub.getBlankList().stream().filter(blank -> blank.getUser().getId().equals(currentUser.getId())).collect(Collectors.toList()));
-
-        hub.setBlankList(hub.getBlankList()
-                .stream()
-                .sorted(Comparator.comparing(Blank::getDateCreate).reversed())
-                .collect(Collectors.toList()));
-        return hub;
-    }
 
     @Override
     public boolean isCanAccessToBlankHub(BlankHub blankHub, User user) {

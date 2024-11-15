@@ -2,37 +2,23 @@ package com.smallaxe.blank_creator.blank.controller;
 
 import com.smallaxe.blank_creator.blank.models.BlankCreateDto;
 import com.smallaxe.blank_creator.blank.models.BlankEditDto;
-import com.smallaxe.blank_creator.blank.models.ImportTemplateDto;
-import com.smallaxe.blank_creator.blank.service.BLankTemplateService;
-import com.smallaxe.blank_creator.blank.service.BlankHubService;
 import com.smallaxe.blank_creator.blank.service.BlankService;
-import com.smallaxe.blank_creator.blank.service.PrintService;
-import org.hibernate.ObjectNotFoundException;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.CredentialException;
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("api/blanks")
 public class BlankController {
 
     private final BlankService blankService;
-    private final BlankHubService blankHubService;
 
-    private final PrintService printService;
 
-    public BlankController(BlankService blankService, BlankHubService blankHubService, PrintService printService) {
+    public BlankController(BlankService blankService) {
         this.blankService = blankService;
-        this.blankHubService = blankHubService;
-        this.printService = printService;
     }
 
 
@@ -70,8 +56,6 @@ public class BlankController {
         var blank = blankService.rejectBlank(id);
         return ResponseEntity.ok().body(blank);
     }
-
-
 
 
 }

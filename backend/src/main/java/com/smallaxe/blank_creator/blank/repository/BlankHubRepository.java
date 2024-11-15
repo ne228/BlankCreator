@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface BlankHubRepository extends JpaRepository<BlankHub, String > {
 
+    BlankHub findBlankHubById(String id);
     List<BlankHub> findBlankHubByUser_Id(String userId, Sort sort);
 
     BlankHub findBlankHubByUser_IdAndId(String userId, String hubId);
