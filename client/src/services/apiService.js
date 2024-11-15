@@ -64,7 +64,7 @@ export const post = async (endpoint, data) => {
 
 export const downloadPost = async (endpoint, data) => {
   try {
-    console.log('post:', endpoint)
+    console.log('downloadPost:', endpoint)
     setAuthToken()
     const response = await apiService.post(endpoint, data, {
       responseType: 'blob' // для получения данных в виде blob

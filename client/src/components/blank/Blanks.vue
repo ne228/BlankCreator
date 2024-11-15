@@ -146,7 +146,6 @@
 </template>
 
 <script>
-import { downloadPost, getData, post } from '@/services/apiService'
 import { saveAs } from 'file-saver'
 import authService from '@/services/authService'
 import ImportBlankTemplate from './ImportBlankTemplate.vue'
@@ -227,8 +226,8 @@ export default {
           }
           idx = this.selectedRows
         }
-
-        const response = await downloadPost(`blank/print/${hubId}`, idx)
+          
+        const response = await this.hubService.printBlank(hubId, idx);
         // Создаем объект URL из Blob
         // const contentDisposition = response.headers['content-disposition'];
         const fileName = `Отчет-${fileId}.docx`

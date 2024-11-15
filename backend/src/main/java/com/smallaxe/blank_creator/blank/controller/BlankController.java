@@ -28,13 +28,11 @@ public class BlankController {
     private final BlankHubService blankHubService;
 
     private final PrintService printService;
-    private final BLankTemplateService bLankTemplateService;
 
-    public BlankController(BlankService blankService, BlankHubService blankHubService, PrintService printService, BLankTemplateService bLankTemplateService) {
+    public BlankController(BlankService blankService, BlankHubService blankHubService, PrintService printService) {
         this.blankService = blankService;
         this.blankHubService = blankHubService;
         this.printService = printService;
-        this.bLankTemplateService = bLankTemplateService;
     }
 
 
@@ -75,20 +73,5 @@ public class BlankController {
 
 
 
-    @PostMapping("/blank/print/{hubId}")
-    public ResponseEntity<?> printHub(@Valid @PathVariable String hubId, @RequestBody List<String> idsBlank) throws Exception {
-        var hub = blankHubService.getHubById(hubId);
-        if (hub == null) throw new ObjectNotFoundException(hubId, "Не найден blankHub");
 
-        if (idsBlank.size() == 0) throw new Exception("idsBLank size must be more 0 ");
-
-        var blanksToPrint = hub.getBlankList().stream().filter(blank -> idsBlank.contains(blank.getId())).collect(Collectors.toList());
-
-        byte[] bytes = printService.print(blanksToPrint);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", "example.docx");
-
-        return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
-    }
 }
