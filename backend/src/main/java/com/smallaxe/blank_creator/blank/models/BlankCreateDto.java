@@ -28,9 +28,6 @@ public class BlankCreateDto {
     @NotBlank
     @NotBlank(message = "Введите должность")
     private String duty;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-    @NotNull(message = "Введите год окончания")
-    private LocalDate dateEnrollment;
     @JsonProperty
     @NotBlank(message = "Введите срок обученя")
     private String trm;
@@ -57,7 +54,6 @@ public class BlankCreateDto {
         blank.setName(this.name);
         blank.setDateBirth(this.dateBirth);
         blank.setDuty(this.duty);
-        blank.setDateEnrollment(this.dateEnrollment);
         blank.setTrm(this.trm);
         blank.setDateEnd(this.dateEnd);
         blank.setPlace(this.place);
@@ -106,14 +102,6 @@ public class BlankCreateDto {
         this.duty = duty;
     }
 
-
-    public LocalDate getDateEnrollment() {
-        return dateEnrollment;
-    }
-
-    public void setDateEnrollment(LocalDate dateEnrollment) {
-        this.dateEnrollment = dateEnrollment;
-    }
 
     public String getTrm() {
         return trm;

@@ -55,7 +55,7 @@
 
 <script>
 import { post } from '@/services/apiService'
-
+import HubService from '@/services/hubApi';
 export default {
   data() {
     const testData = false
@@ -98,7 +98,8 @@ export default {
         console.log('Данные отправлены:', this.form)
         this.form.hubId = this.$route.params.hubId
         try {
-          const response = await post('/create', this.form)
+          var hubService = new HubService();
+          const response = await hubService.createHub(this.form);
           console.log('Response:', response.id)
           this.$router.push(`/hub/${response.id}`)
         } catch (error) {

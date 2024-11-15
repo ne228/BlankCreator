@@ -5,7 +5,7 @@ import authService from './authService'
 
 const JAVA_IP = import.meta.env.VITE_JAVA_IP;
 const JAVA_PORT = import.meta.env.VITE_JAVA_PORT;
-const BASE_URL = `http://${JAVA_IP}:${JAVA_PORT}/api/hub`
+const BASE_URL = `http://${JAVA_IP}:${JAVA_PORT}/api`
 
 const apiService = axios.create({
   baseURL: BASE_URL,
@@ -27,7 +27,7 @@ export const setAuthToken = () => {
     } else {
       delete apiService.defaults.headers.common['Authorization']
     }
-    console.log('set auth')
+    // console.log('set auth')
   } catch (error) {
     console.log('Error in setAuthToken:', error)
     throw error

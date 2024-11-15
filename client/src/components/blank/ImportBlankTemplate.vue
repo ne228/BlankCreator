@@ -44,6 +44,7 @@
   
   <script>
 import { getData, post } from '@/services/apiService';
+import HubService from '@/services/hubApi';
 
  
   export default {
@@ -56,6 +57,7 @@ import { getData, post } from '@/services/apiService';
     },
     data() {
       return {
+        hubService: new HubService(),
         dialog: false, // Состояние для управления модальным окном
         items: [],     // Список элементов
       };
@@ -73,7 +75,7 @@ import { getData, post } from '@/services/apiService';
       async submitItem(itemId) {
         try{
           var data = { hubId: this.hubId, templateId: itemId }
-          const response = await post(`templates/import`, data);
+          const response = await this.hubService.templateImport(data);
           this.$emit('importSuccess', response);
           this.closeDialog();
         } catch(error){
@@ -82,7 +84,7 @@ import { getData, post } from '@/services/apiService';
       },
       async requestData() {
             try {                
-                const response = await getData(`templates`);
+                const response = await this.hubService.getTemplates();
 
                 // Check if response.data and response.data.blankList exist
                 if (response && response.data) {

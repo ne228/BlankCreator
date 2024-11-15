@@ -142,21 +142,20 @@
 
 <script>
 import { post } from '@/services/apiService'
+import HubService from '@/services/hubApi';
 
 export default {
   data() {
-    const testData = false
+    const testData = true
     return {
       valid: false,
+      hubService: new HubService(),
       form: {
         hubId: '',
         rank: testData ? 'рядовой полиции' : '',
         name: testData ? 'Иванов Иван Иванович' : '',
         dateBirth: testData ? '27.05.2001' : '',
         duty: testData ? 'курсанта' : '',
-        datePr: testData ? '01.09.2019' : '',
-        numPr: testData ? '515-12' : '',
-        dateEnrollment: testData ? '01.09.2025' : '',
         trm: testData ? '5' : '',
         dateEnd: testData ? '2030' : '',
         place: testData ? 'МФЦ Благовещенский' : '',
@@ -197,7 +196,7 @@ export default {
         console.log('Данные отправлены:', this.form)
         this.form.hubId = this.$route.params.hubId
         try {
-          const response = await post(`blank/create`, this.form)
+          const response = await this.hubService.createBlank(this.form);
           console.log('Response:', response.id)
           this.$router.push(`/hub/${this.$route.params.hubId}/blank/${response.id}`)
         } catch (error) {

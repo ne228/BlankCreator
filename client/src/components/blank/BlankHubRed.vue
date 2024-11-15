@@ -58,12 +58,15 @@
 
 <script>
 import { post, getData } from '@/services/apiService'
+import HubService from '@/services/hubApi';
+import { th } from 'vuetify/lib/locale/index.mjs';
 
 export default {
   data() {
     const testData = false
     return {
       valid: false,
+      hubService: null,
       form: {
         datePr: testData ? '01.09.2019' : '',
         numPr: testData ? '515-12' : '',
@@ -85,6 +88,7 @@ export default {
     }
   },
   mounted() {
+    this.hubService = new HubService();
     this.requestData()
   },
   methods: {
@@ -103,8 +107,7 @@ export default {
     async requestData() {
       try {
         var id = this.$route.params.id
-        const response = await getData(`get?id=${id}`)
-        // this.form = response.data;
+        const response = await this.hubService.getHubById(id)
         console.log('getBlankInfo', response)
         this.form = response.data
       } catch (error) {
@@ -116,8 +119,8 @@ export default {
         console.log('Данные отправлены:', this.form)
         this.form.hubId = this.$route.params.id
         try {
-          const response = await post('/edit', this.form)
-          console.log('Response:', response.id)
+          const response = await this.hubService.editHub(this.form);
+          console.log('editHub:', response.id)
           this.snackbar.show = true
           this.error = null
           // this.$router.push(`/hub/${response.id}`)

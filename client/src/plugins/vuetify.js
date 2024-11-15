@@ -9,7 +9,7 @@ import { createVuetify } from 'vuetify'
 
 const vuetify = createVuetify({
   theme: {
-    defaultTheme: 'dark'
+    // defaultTheme: 'dark'
   },
   locale: {
     current: 'ru', // Устанавливаем русский язык по умолчанию

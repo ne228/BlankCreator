@@ -150,6 +150,7 @@ import { downloadPost, getData, post } from '@/services/apiService'
 import { saveAs } from 'file-saver'
 import authService from '@/services/authService'
 import ImportBlankTemplate from './ImportBlankTemplate.vue'
+import HubService from '@/services/hubApi';
 export default {
   components: {
     ImportBlankTemplate
@@ -157,7 +158,7 @@ export default {
   data() {
     return {
       data: [], // Массив для хранения данных
-
+      hubService: new HubService(),
       selectAll: false,
       selectedRows: [], // Выбранные строки
       hub: null,
@@ -180,7 +181,7 @@ export default {
   },
   computed: {
     filteredData() {
-      console.log(this.search)
+      //console.log(this.search)
 
       if (!this.search) {
         return this.data
@@ -197,7 +198,7 @@ export default {
     async requestData() {
       try {
         const id = this.$route.params.id
-        const response = await getData(`get?id=${id}`)
+        const response = await this.hubService.getHubById(id);
 
         // Check if response.data and response.data.blankList exist
         if (response && response.data) {
@@ -243,7 +244,7 @@ export default {
 
     async success(blankData) {
       try {
-        const response = await post(`blank/success/${blankData.id}`)
+        const response = await this.hubService.blankSuccess(blankData.id);
 
         // Check if response.data and response.data.blankList exist
         if (response) {
@@ -261,7 +262,7 @@ export default {
     },
     async reject(blankData) {
       try {
-        const response = await post(`blank/reject/${blankData.id}`)
+        const response =await this.hubService.blankReject(blankData.id);
 
         // Check if response.data and response.data.blankList exist
         if (response) {
