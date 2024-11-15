@@ -4,7 +4,7 @@
       <v-card class="d-flex flex-column profile">
         <v-card-title>
           <v-icon left>mdi-account</v-icon>
-          <span class="ml-2">Профиль {{ user.username }}</span>
+          <span class="ml-2">Профиль: {{ user.username }}</span>
         </v-card-title>
         <v-divider></v-divider>
         <!-- Блок с информацией о пользователе -->
