@@ -24,7 +24,8 @@ jobs:
         run: |
           sudo apt-get install sshpass 
           sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
-            cd BlankCreator  # Переходим в папку с проектом на сервере
+            cd BlankCreator 
+            git pull
             ./stop.sh
             ./start.sh
           EOF
