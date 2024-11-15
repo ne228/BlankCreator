@@ -34,18 +34,20 @@
       </v-col>
 
       <v-col cols="12" md="5">
-        <v-card href="/hub" class="feature-card elevate">
-          <h3 class="feature-title">
-            <v-icon class="feature-icon" color="primary">mdi-shield-account</v-icon> Для
-            администраторов
-          </h3>
-          <p>Управляйте хранилищами и предоставляйте доступ:</p>
-          <ul class="feature-list">
-            <li>Создание и распространение ссылок</li>
-            <li>Отслеживание статусов справок</li>
-            <li>Управление данными пользователей</li>
-          </ul>
-        </v-card>
+        <RouterLink v-if="!isAuthenticated" to="/hub" class="mr-2">
+          <v-card class="feature-card elevate">
+            <h3 class="feature-title">
+              <v-icon class="feature-icon" color="primary">mdi-shield-account</v-icon> Для
+              администраторов
+            </h3>
+            <p>Управляйте хранилищами и предоставляйте доступ:</p>
+            <ul class="feature-list">
+              <li>Создание и распространение ссылок</li>
+              <li>Отслеживание статусов справок</li>
+              <li>Управление данными пользователей</li>
+            </ul>
+          </v-card>
+        </RouterLink>
       </v-col>
     </v-row>
 
