@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("api/auth")
 public class AuthController {
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -143,6 +144,7 @@ public class AuthController {
 
         if (!signUpRequest.getPassword().equals(signUpRequest.getRetypePassword()))
             throw new ValidationException("Пароли не совпадают");
+
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()

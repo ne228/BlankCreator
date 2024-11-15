@@ -132,6 +132,7 @@
 
 <script>
 import { post, getData } from '@/services/apiService'
+import HubService from '@/services/hubApi'
 
 export default {
   data() {
@@ -139,6 +140,7 @@ export default {
     return {
       id: '',
       valid: false,
+      hubService: new HubService(),
       form: {
         id: '',
         hubId: '',
@@ -187,7 +189,7 @@ export default {
     },
     async requestData() {
       try {
-        const response = await getData(`blank/${this.$route.params.blankId}`)
+        const response = await this.hubService.getBlankById(this.$route.params.blankId)
         // this.form = response.data;
         console.log('getBlankInfo', response)
         this.form = response.data
@@ -200,7 +202,7 @@ export default {
         console.log('Данные отправлены:', this.form)
         this.form.hubId = this.$route.params.hubId
         try {
-          const response = await post(`blank/edit`, this.form)
+          const response =  await this.hubService.editBlank(this.form);
           console.log('Response:', response)
           this.snackbar.show = true
           this.error = null

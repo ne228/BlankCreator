@@ -73,9 +73,9 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue';
-import { getData, post } from '@/services/apiService';
+
 import router from '@/router';
+import HubService from '@/services/hubApi';
 
 export default {
     name: 'FilteredTable',
@@ -113,8 +113,8 @@ export default {
     methods: {
         async requestData() {
             try {
-
-                const response = await getData('');
+                var hubService = new HubService();
+                const response = await hubService.getHubs();
                 console.log(response);
 
 

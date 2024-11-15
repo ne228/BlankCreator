@@ -25,12 +25,12 @@ public class AuthService {
 
     }
 
-    public User getCurrentUser() throws CredentialException {
+    public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             var usr = (User) authentication.getPrincipal();
             return userRepository.findByUsername(usr.getUsername()).orElse(null);
         }
-        throw new CredentialException("Not authorized");
+        return null;
     }
 }

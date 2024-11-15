@@ -47,12 +47,14 @@
 import { getData } from '@/services/apiService';
 
 import ImportBlankTemplate from './ImportBlankTemplate.vue';
+import HubService from '@/services/hubApi';
 export default {
     components:{
         ImportBlankTemplate
     },
     data() {
         return {
+            hubService: new HubService(),
             data: [], // Массив для хранения данных
             selectAll: false,
             selectedRows: [], // Выбранные строки
@@ -86,7 +88,7 @@ export default {
     methods: {
         async requestData() {
             try {
-                const response = await getData(`blanks`);
+                const response = await this.hubService.getBlanks();
 
                 // Check if response.data and response.data.blankList exist
                 if (response && response.data) {
