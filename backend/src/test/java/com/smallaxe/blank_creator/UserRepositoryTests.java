@@ -10,11 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
+//@SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRepositoryTests {
 
@@ -23,8 +25,8 @@ public class UserRepositoryTests {
     @Autowired
     private RoleRepository roleRepository;
 
-    private final String email = "user@mail.ru";
-    private final String username = "user228";
+    private final String email = "testuser@mail.ru";
+    private final String username = "test_user228";
     private final String rawPassword = "qwerty123";
 
     private Role roleUser;

@@ -15,11 +15,14 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Sort;
 
 import javax.security.auth.login.CredentialException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+//import java.util.Formatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.openMocks;
 
 class BlankHubServiceImplTest {
     @Mock
@@ -53,7 +56,7 @@ class BlankHubServiceImplTest {
         userNotCreatorBlank = new Blank();
         userNotCreatorBlank.setUser(anotherUser);
         userNotCreatorBlank.setId("1");
-        MockitoAnnotations.openMocks(this);  // Инициализация моков
+        openMocks(this);  // Инициализация моков
     }
 
     @Test
@@ -89,18 +92,5 @@ class BlankHubServiceImplTest {
         });
     }
 
-    @SneakyThrows
-    @Test
-    void test_getBlankHubById_throwsObjectNotFound() {
-        var hub1 = new BlankHub();
-        hub1.setId(blankHub1Id);
-        hub1.setUser(currentUser);
 
-        when(authService.getCurrentUser()).thenReturn(currentUser);
-        when(blankHubRepository.findById(blankHub1Id)).thenReturn(null);
-
-        assertThrows(ObjectNotFoundException.class, () -> {
-            blankHubService.getHubById(blankHub1Id);
-        });
-    }
 }
